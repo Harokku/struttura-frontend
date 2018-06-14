@@ -1,11 +1,23 @@
 import React from 'react';
 import Login from './components/Login';
-import LoginCompact from './components/LoginCompact';
+import Feeds from './components/Feeds';
+import {Divider} from 'semantic-ui-react'
+
+import {testUser} from './mockData/loginData'
+import {feedData} from './mockData/feedData'
 
 const App = () => (
   <div>
-    <Login/>
-    <LoginCompact/>
+    <Divider horizontal>Login</Divider>
+    <Login
+      surname={testUser.surname}
+      name={testUser.name}
+      role={testUser.role}
+      regNumber={testUser.regNumber}
+      mobile={testUser.mobile}
+      mail={testUser.mail}/>
+    <Divider horizontal>Feed</Divider>
+    <Feeds feeds={feedData}/>
   </div>
 )
 
