@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import LoginCompact from './LoginCompact'
 import DeadlineLabel from './DeadlineLabel'
+import DeadLine from './Deadline'
 import {Button, Container, Label, Segment, Popup, Header, List, Divider} from 'semantic-ui-react';
 
 const Login = (props) => (
@@ -34,42 +35,27 @@ const Login = (props) => (
             <List.Description>{props.mail}</List.Description>
           </List.Content>
         </List.Item>
+        <List.Item>
+          <List.Icon name='drivers license'/>
+          <List.Content>
+            <List.Header>Patente</List.Header>
+            <List.Description>{props.driverLicense ? props.driverLicense : 'Patente non conseguita'}</List.Description>
+          </List.Content>
+        </List.Item>
       </List>
 
       <Divider horizontal>Scadenze</Divider>
 
       <Segment color='red'>
-        <Popup on={['click', 'hover']}
-               trigger={<DeadlineLabel name='DAE' expiredate='2018-11-12' color='teal'/>}
-               flowing
-               hoverable>
-          <Header>Certificazione DAE</Header>
-          <p>
-            Richiede esame di ricertificazione
-          </p>
-          <Button primary>Iscriviti</Button>
-        </Popup>
-        <Popup on={['click', 'hover']}
-               trigger={<DeadlineLabel name='Patente 5' expiredate='2018-01-01' color='red'/>}
-               flowing
-               hoverable>
-          <Header>Patente di guida CRI</Header>
-          <Segment raised>
-            <Label color='orange' ribbon>Documenti necessari</Label>
-            <List divided relaxed>
-              <List.Item>2 Fototessere</List.Item>
-              <List.Item>Carta d'identità</List.Item>
-            </List>
-          </Segment>
-          <Segment raised>
-            <Label color='blue' ribbon>Esami necessari</Label>
-            <List divided relaxed>
-              <List.Item>Visita Medica</List.Item>
-              <List.Item>Prova riflessi</List.Item>
-            </List>
-          </Segment>
-          <Button primary>Iscriviti</Button>
-        </Popup>
+        {props.deadLines.map((deadLine, index) => (
+          <DeadLine
+            key={index}
+            deadlineName={deadLine.deadLineName}
+            deadLineHeader={deadLine.deadLineHeader}
+            expiredate={deadLine.expiredate}
+            instructions={deadLine.instructions}
+          />
+        ))}
       </Segment>
 
     </Segment>
@@ -82,7 +68,9 @@ Login.propTypes = {
   role: PropTypes.string.isRequired,
   regNumber: PropTypes.string.isRequired,
   mobile: PropTypes.string.isRequired,
-  mail: PropTypes.string.isRequired
+  mail: PropTypes.string.isRequired,
+  driverLicense: PropTypes.string,
+  deadLines: PropTypes.array
 }
 
 export default Login;

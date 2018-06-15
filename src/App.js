@@ -15,7 +15,9 @@ const App = () => (
       role={testUser.role}
       regNumber={testUser.regNumber}
       mobile={testUser.mobile}
-      mail={testUser.mail}/>
+      mail={testUser.mail}
+      driverLicense={testUser.driverLicense}
+      deadLines={testUser.deadLines}/>
     <Divider horizontal>Feed</Divider>
     <Feeds feeds={feedData}/>
   </div>
